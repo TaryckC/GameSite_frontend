@@ -2,13 +2,13 @@ import { GameContext } from "@/contexts/GameContext"
 import { useContext } from "react"
 
 function useGameContext() {
-    const game = useContext(GameContext)
+    const gameContext = useContext(GameContext)
     
-    if (game === undefined) {
+    if (gameContext === undefined) {
         throw new Error("UseGameContext must be used within a GameContext")
     }
 
-    return game
+    return gameContext
 }
 
 export default useGameContext
