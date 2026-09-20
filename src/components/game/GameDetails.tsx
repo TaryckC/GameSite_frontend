@@ -1,5 +1,4 @@
 import useGameContext from "@/hooks/useGameContext"
-import { useState } from "react"
 import "./GameDetails.css"
 
 type GamedetailsProps = {
@@ -27,7 +26,7 @@ function GameDetails({default_form_id}: GamedetailsProps) {
                 >
                     <label htmlFor="game-id">Game ID</label>
                     <div className="game-loader-controls">
-                        <input id="game-id" name="gameId" type="number" min="1"/>
+                        <input id="game-id" name="gameId" type="number" min="1" defaultValue={default_form_id}/>
                         <button type="submit">Load game</button>
                     </div>
                 </form>

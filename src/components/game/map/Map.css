@@ -1,0 +1,5 @@
+.map-panel { margin: 24px auto; width: min(100% - 32px, 900px); }
+.map-controls { display: flex; gap: 12px; }
+.map-panel fieldset { display: grid; gap: 8px; border: 0; padding: 0; }
+.map-scroll { overflow: auto; max-height: 640px; margin-top: 16px; }
+.map-grid { display: grid; width: max-content; }

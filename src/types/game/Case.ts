@@ -3,6 +3,8 @@ export type Case = {
     playerNumber: number
     maxPlayer: number
     map: number // Id
+    height: number
+    width: number
     x: number
     y: number
     color: string

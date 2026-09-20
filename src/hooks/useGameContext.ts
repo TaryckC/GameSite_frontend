@@ -1,4 +1,4 @@
-import { GameContext } from "@/contexts/GameContext"
+import { GameContext } from "@/contexts/gameContextValue"
 import { useContext } from "react"
 
 function useGameContext() {

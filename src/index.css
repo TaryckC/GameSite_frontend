@@ -27,3 +27,148 @@ input,
 select {
   font: inherit;
 }
+
+/* Map panel — targeted from its current position after the game details panel. */
+.game-attributes + div {
+  width: min(100% - 32px, 900px);
+  margin: 0 auto clamp(32px, 6vw, 72px);
+  padding: clamp(20px, 4vw, 36px);
+  border: 1px solid #dbe3ef;
+  border-radius: 24px;
+  color: #162033;
+  background: #fff;
+  box-shadow: 0 20px 50px rgb(28 48 82 / 8%);
+}
+
+.game-attributes + div > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.game-attributes + div > div:first-child::before {
+  content: "Map settings";
+  color: #101828;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.game-attributes + div button {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: #3568d4;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.game-attributes + div button:hover {
+  background: #2859be;
+  box-shadow: 0 8px 16px rgb(53 104 212 / 22%);
+  transform: translateY(-1px);
+}
+
+.game-attributes + div button:focus-visible,
+.game-attributes + div input:focus-visible {
+  outline: 3px solid #93b4ff;
+  outline-offset: 2px;
+}
+
+.game-attributes + div > div:last-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.game-attributes + div > div:last-child > div {
+  overflow: hidden;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+}
+
+.game-attributes + div table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.game-attributes + div tr:not(:last-child) {
+  border-bottom: 1px solid #edf1f6;
+}
+
+.game-attributes + div th,
+.game-attributes + div td {
+  padding: 14px 16px;
+  vertical-align: top;
+}
+
+.game-attributes + div th {
+  width: 45%;
+  color: #475467;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.game-attributes + div td {
+  overflow-wrap: anywhere;
+  color: #1d2939;
+}
+
+.game-attributes + div form {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  background: #f8fafc;
+}
+
+.game-attributes + div form > div {
+  display: grid;
+  gap: 7px;
+}
+
+.game-attributes + div label {
+  color: #475467;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.game-attributes + div input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: #1e293b;
+  background: #fff;
+}
+
+.game-attributes + div form button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .game-attributes + div {
+    width: min(100% - 24px, 900px);
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .game-attributes + div > div:first-child {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .game-attributes + div > div:last-child {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

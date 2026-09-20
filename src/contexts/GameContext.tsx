@@ -1,33 +1,24 @@
 import { fetchGame, fetchMap, patchMap } from "@/routes/game/game";
 import type { Game } from "@/types/game/Game";
 import type { Map } from "@/types/game/Map";
-import { createContext, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
+import { GameContext } from "./gameContextValue";
 
-// Declaring GameContext
-export const GameContext = createContext<GameContextValue | undefined>(undefined)
-
-// Creating GameContext provider
-type GameProviderProps = { 
-    children: ReactNode,
-    gameId: number
-}
-
-type GameContextValue = {
-    gameId: number | undefined
-    game: Game | undefined
-    map: Map | undefined
-    loadGame: (id: number) => void
-    loadMap: () => void
-    updateMap: (width: number, height: number) => void
-}
+type GameProviderProps = { children: ReactNode }
 
 export default function GameProvider({ children }: GameProviderProps) {
     const [game, setGame] = useState<Game>()
     const [map, setMap] = useState<Map>()
     const [gameId, setGameId] = useState<number>()
+    const activeGameId = useRef<number | undefined>(undefined)
  
     async function loadGame(id: number) {
+        activeGameId.current = id
+        setMap(undefined)
+        setGame(undefined)
+        setGameId(undefined)
         const data = await fetchGame(id)
+        if (activeGameId.current !== id) return
         if (!data) {
             throw new Error("Could not fetch game. Id : " + id)
         }
@@ -42,11 +33,7 @@ export default function GameProvider({ children }: GameProviderProps) {
 
         const map = await fetchMap(gameId)
 
-        if (!map) {
-            throw new Error("Could not fetch map for given game id")
-        }
-
-        setMap(map)
+        if (activeGameId.current === gameId) setMap(map)
     }
 
     async function updateMap(width: number, height: number) {
@@ -56,16 +43,16 @@ export default function GameProvider({ children }: GameProviderProps) {
 
         const result = await patchMap(gameId, width, height)
 
-        setMap(result)
+        if (activeGameId.current === gameId) setMap(result)
     }
 
-    const value: GameContextValue = {
+    const value = {
         gameId: gameId,
         game: game,
         map: map,
         loadGame: loadGame,
         loadMap: loadMap,
-        updateMap: updateMap
+        updateMap: updateMap,
     }
 
     return (
